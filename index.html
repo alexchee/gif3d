@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.js" ></script>
+    <!-- for gif gen -->
+    <!-- <script src='gifshot.js'></script> -->
+    <!-- for player -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.js" ></script>
+    <script type="text/javascript" src="360photo.js" ></script>
+    <script type="text/javascript" src="gif.js" ></script>
+    <script type="text/javascript" src="GLGif.js" ></script>
+  </head>
+  <body>
+    <div id="cont"></div>
+    <div id="info">Powered by <a href="http://threejs.org" target="_blank">three.js webgl</a>. See readme file for information on where to get 360° photos.</div>
+
+    <canvas id="myCanvas" width="200" height="100"></canvas>
+    <script type="text/javascript">
+      document.addEventListener("DOMContentLoaded", function() {
+        loadGif('360.gif', startTHREE);
+      });
+    </script>
+  </body>
+</html>
