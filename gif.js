@@ -1,3 +1,6 @@
+// Copyright (c) 2011 Shachaf Ben-Kiki
+// from https://github.com/shachaf/jsgif
+
 // Generic functions
 var bitsToNum = function(ba) {
   return ba.reduce(function(s, n) { return s * 2 + n; }, 0);
