@@ -4,7 +4,8 @@
     <!-- for gif gen -->
     <!-- <script src='gifshot.js'></script> -->
     <!-- for player -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r73/three.js" ></script>
+    <script type="text/javascript" src="bower_components/three.js/build/three.min.js"></script>
+    <script type="text/javascript" src="bower_components/webvr-polyfill/build/webvr-polyfill.js"></script>
     <script type="text/javascript" src="360photo.js" ></script>
     <script type="text/javascript" src="gif.js" ></script>
     <script type="text/javascript" src="GLGif.js" ></script>
@@ -16,6 +17,9 @@
     <canvas id="myCanvas" width="200" height="100"></canvas>
     <script type="text/javascript">
       document.addEventListener("DOMContentLoaded", function() {
+        // $.get('https://github.com/alexchee/gif3d/raw/master/360.gif', function(data){
+        //   loadGIF(data, startTHREE)
+        // });
         loadGif('360.gif', startTHREE);
       });
     </script>

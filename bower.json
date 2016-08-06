@@ -1,0 +1,27 @@
+{
+  "name": "gif3d",
+  "description": "Express yourself with 360 gifs!",
+  "main": "360photo.js",
+  "authors": [
+    "Alex Chee <alexchee11@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "360",
+    "gif",
+    "vr"
+  ],
+  "homepage": "https://github.com/alexchee/gif3d",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "three.js": "threejs#*",
+    "webvr-polyfill": "^1.0.0"
+  }
+}
