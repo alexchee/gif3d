@@ -3,31 +3,36 @@
 //
 // GLGif.js
 //
+// Modified to return Materials instead
 //--------------------------------------------------------------------------------------------------------
 
 function loadGif(img, onload) {
 	// Init
 	var gif = {};
-	gif.tex = [];
+	// gif.tex = [];
+	gif.materials = [];
 	gif.frame = 0;
 	gif.loaded = false;
 	gif.length = 1;
-	gif.time = 0;
-	gif.reset = function(time) {
-		this.time = 0;
+	gif.timer = new Timer();
+	gif.reset = function() {
+		this.timer.reset();
 	}
 	gif.setFps = function(fps) {
-		this.length = this.tex.length / fps;
+		this.length = this.materials.length / fps;
 	}
 	gif.setLength = function(length) {
 		this.length = length;
 	}
-	gif.update = function(time) {
-		var f = (time - this.time) % this.length;
-		this.frame = Math.floor((f / this.length) * this.tex.length);
-	};
-	gif.getTexture = function() {
-		return this.tex[this.frame];
+	gif.update = function() {
+		this.timer.update();
+		var f = (this.timer.time + this.timer.delta) % this.length;
+
+		this.frame = Math.floor((f / this.length) * this.materials.length);
+	}
+
+	gif.getMaterial = function() {
+		return this.materials[this.frame];
 	}
 
 	// loadImage
@@ -67,12 +72,21 @@ function loadGif(img, onload) {
 		// Create THREE texture
 		var texture = new THREE.Texture(canvas);
 		texture.needsUpdate = true;
-		gif.tex.push(texture);
+		// works but ineffecient
+		// gif.tex.push(texture);
+
+		// So so bad if adding, and deleting meshes
+		// var mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: texture } ) );
+		// mesh.scale.x = -1;
+		// gif.meshes.push(mesh);
+
+		// Try to make materials
+		gif.materials.push(new THREE.MeshBasicMaterial( { map: texture } ));
 	};
 
 	var doEof = function(block) {
 		gif.loaded = true;
-		gif.reset(0);
+		gif.reset();
 		if (onload)
 			onload(gif);
 	}

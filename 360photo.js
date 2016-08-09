@@ -1,9 +1,10 @@
 function startTHREE(gif)
 // function startTHREE(texture)
 {
-    var texture = gif.getTexture();
-    // your code here
+    const fps = 14;
+    var currentMesh;
     var camera, scene, renderer;
+    var scenes = [];
     const maxFrames = 200;
     var currentFrame = 0;
 
@@ -22,7 +23,7 @@ function startTHREE(gif)
 
         var cont, mesh;
 
-        gif.setFps(1);
+        gif.setFps(fps);
 
         cont = document.getElementById( 'cont' );
 
@@ -31,10 +32,14 @@ function startTHREE(gif)
 
         scene = new THREE.Scene();
 
-        newScene();
-        // mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: texture } ) );
-        // mesh.scale.x = -1;
-        // scene.add( mesh );
+        // Try to create an inverted sphere, then swap texture
+        const material = gif.getMaterial();
+        var sphereGeo = new THREE.SphereGeometry( 500, 60, 40 );
+        currentMesh = new THREE.Mesh( sphereGeo, material );
+        currentMesh.scale.x = -1
+        scene.add(currentMesh);
+
+        updateMeshMaterial();
 
         renderer = new THREE.WebGLRenderer();
         renderer.setSize( window.innerWidth, window.innerHeight );
@@ -119,18 +124,16 @@ function startTHREE(gif)
 
     }
 
-    function newScene() {
-      gif.update(new Date());
-      texture = gif.getTexture();
-
-      mesh = new THREE.Mesh( new THREE.SphereGeometry( 500, 60, 40 ), new THREE.MeshBasicMaterial( { map: texture } ) );
-      mesh.scale.x = -1;
-      scene.add( mesh );
+    // studders alot
+    function updateMeshMaterial() {
+      gif.update();
+      currentMesh.material = gif.getMaterial();
     }
 
     function animate() {
         requestAnimationFrame( animate );
-        newScene();
+
+        updateMeshMaterial()
         render();
 
     }
